@@ -16,3 +16,11 @@ const cusines = [
     name: "Chinese"
   }
 ];
+
+function getCusines() {
+  return cusines;
+}
+
+export default {
+  getCusines
+};

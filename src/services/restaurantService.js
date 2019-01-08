@@ -85,3 +85,16 @@ const restaurants = [
     cusineId: "5c3430ecfc13ae122d000003"
   }
 ];
+
+function getRestaurants() {
+  return restaurants;
+}
+
+function getResturant(id) {
+  return restaurants.find(restaurant => restaurant._id === id);
+}
+
+export default {
+  getRestaurants,
+  getRestaurant
+};
