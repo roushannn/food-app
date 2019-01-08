@@ -1,4 +1,4 @@
-import { timeout } from "q";
+import * as restaurantAPI from "./restaurantService";
 
 const menuItems = [
   {
