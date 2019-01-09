@@ -438,19 +438,19 @@ const menuItems = [
   }
 ];
 
-function getMenuItems() {
+export function getMenuItems() {
   return menuItems;
 }
 
-function getMenuItem(itemId) {
+export function getMenuItem(itemId) {
   return menuItems.find(item => item._id == itemId);
 }
 
-function getMenuItemsFor(restaurantId) {
+export function getMenuItemsFor(restaurantId) {
   return menuItems.find(item => item.restaurant._id == restaurantId);
 }
 
-function saveMenuItem(newItem) {
+export function saveMenuItem(newItem) {
   const menuItem = menuItems.find(item => item._id === newItem._id) || {};
   menuItem.name = newItem.name;
   menuItem.restaurant = restaurantAPI
@@ -465,16 +465,9 @@ function saveMenuItem(newItem) {
   return menuItem;
 }
 
-function deleteMenuItem(menuItemId) {
+export function deleteMenuItem(menuItemId) {
   const menuItem = menuItems.find(item => item._id === menuItemId);
   menuItems.splice(menuItems.indexOf(menuItem), 1);
   return menuItem;
 }
 
-export default {
-  getMenuItems,
-  getMenuItem,
-  getMenuItemsFor,
-  saveMenuItem,
-  deleteMenuItem
-};

@@ -97,15 +97,10 @@ const restaurants = [
   }
 ];
 
-function getRestaurants() {
+export function getRestaurants() {
   return restaurants;
 }
 
-function getResturant(id) {
+export function getResturant(id) {
   return restaurants.find(restaurant => restaurant._id === id);
 }
-
-export default {
-  getRestaurants,
-  getRestaurant
-};

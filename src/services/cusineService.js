@@ -17,10 +17,6 @@ const cusines = [
   }
 ];
 
-function getCusines() {
+export function getCusines() {
   return cusines;
 }
-
-export default {
-  getCusines
-};
