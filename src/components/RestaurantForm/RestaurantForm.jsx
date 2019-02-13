@@ -128,6 +128,7 @@ class RestaurantForm extends Component {
             options={cuisines}
             onChange={this.handleChange}
             value={cuisineId}
+            error={errors.cuisineId}
           />
           <Input
             name="averagePrice"
