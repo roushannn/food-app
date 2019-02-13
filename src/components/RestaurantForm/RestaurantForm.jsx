@@ -4,6 +4,7 @@ import { getRestaurants, saveRestaurant } from "../../services/restaurantService
 import Input from "../common/Input/Input";
 import TimeInput from "../common/Input/TimeInput";
 import SelectInput from "../common/Input/SelectInput";
+import Joi from "joi-browser";
 
 class RestaurantForm extends Component {
   state = {
@@ -17,6 +18,22 @@ class RestaurantForm extends Component {
       averagePrice: "",
       imageUrl: ""
     }
+  };
+
+  schema = {
+    _id: Joi.string(),
+    name: Joi.string().required(),
+    address: Joi.string().required(),
+    openingTime: Joi.string().required(),
+    closingTime: Joi.string().required(),
+    cuisineId: Joi.string().required(),
+    averagePrice: Joi.number()
+      .integer()
+      .min(1)
+      .required(),
+    imageUrl: Joi.string()
+      .uri({ allowRelative: true })
+      .required()
   };
 
   componentDidMount() {
@@ -37,6 +54,8 @@ class RestaurantForm extends Component {
     const { cuisineId, averagePrice } = this.state.data;
     const cuisine = getCuisines().find(cuisine => cuisine._id === cuisineId);
 
+    this.validate();
+
     let restaurant = { ...this.state.data };
     delete restaurant.cuisineId;
     restaurant.cuisine = cuisine;
@@ -45,6 +64,13 @@ class RestaurantForm extends Component {
     saveRestaurant(restaurant);
     this.props.history.replace(this.props.returnPath);
   };
+
+  validate = () => {
+    const data = { ...this.state.data };
+    const options = { abortEarly: false };
+    const result = Joi.validate(data, this.schema, options);
+    console.log(result);
+  }
 
   handleChange = ({ currentTarget: input }) => {
     const data = { ...this.state.data };
