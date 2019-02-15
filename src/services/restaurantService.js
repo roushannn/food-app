@@ -121,13 +121,22 @@ export function deleteRestaurant(id) {
 }
 
 export function saveRestaurant(restaurant) {
-  let existing = restaurants.find(res => res._id === restaurant._id) || {};
-  //create new object existing and incoming values merged
-  let newRestaurant = { ...existing, ...restaurant };
-
-  if (!newRestaurant._id) {
-    newRestaurant._id = Date.now();
+  let existing = restaurants.find(res => res._id === restaurant._id);
+  if (existing) {
+    //create new object existing and incoming values merged
+    const merged = { ...existing, ...restaurant };
+    //delete existing
+    restaurants = restaurants.filter(
+      restaurant => restaurant._id !== existing._id
+    );
+    restaurants.push(merged);
+    return merged;
+  } else {
+    const newRestaurant = {
+      _id: Date.now(),
+      ...restaurant
+    };
     restaurants.push(newRestaurant);
+    return newRestaurant;
   }
-  return newRestaurant;
 }
