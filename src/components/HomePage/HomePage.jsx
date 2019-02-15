@@ -18,8 +18,34 @@ class HomePage extends Component {
   };
 
   handleCuisineSelect = cuisine => {
-    // const selectedCuisine = cuisines.find(element => element._id === cuisine._id)
     this.setState({ selectedCuisine: cuisine });
+  };
+
+  handleSortSelect = event => {
+    this.setState({ selectedSortBy: event.target.value });
+  };
+
+  compareByName = (a, b) => {
+    const aName = a.name.toLowerCase();
+    const bName = b.name.toLowerCase();
+    if (aName < bName) {
+      return -1;
+    }
+    if (aName > bName) {
+      return 1;
+    }
+    return 0;
+  };
+
+  compareByPrice = (a, b) => {
+    return a.averagePrice - b.averagePrice;
+  };
+
+  sortByOption = (restaurants, sortOption) => {
+    if (sortOption === "name") {
+      return restaurants.sort(this.compareByName);
+    }
+    return restaurants.sort(this.compareByPrice);
   };
 
   render() {
@@ -30,10 +56,16 @@ class HomePage extends Component {
       sortByOptions,
       selectedSortBy
     } = this.state;
+
     const filteredRestaurantList =
       selectedCuisine === getDefaultCuisine()
         ? restaurants
         : restaurants.filter(res => res.cuisine._id === selectedCuisine._id);
+
+    const sortedRestaurantList = this.sortByOption(
+      filteredRestaurantList,
+      selectedSortBy
+    );
 
     return (
       <div className="container">
@@ -47,16 +79,17 @@ class HomePage extends Component {
           </div>
 
           <div className="col-auto mt-3">
-            <SortBySelect options={sortByOptions} selected={selectedSortBy} />
+            <SortBySelect
+              options={sortByOptions}
+              selected={selectedSortBy}
+              handleSelect={this.handleSortSelect}
+            />
           </div>
         </div>
 
         <div className="row">
-          {filteredRestaurantList.map(restaurant => (
-            <div
-              className="col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex"
-              key={restaurant._id}
-            >
+          {sortedRestaurantList.map(restaurant => (
+            <div className="col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex" key={restaurant._id}>
               <Restaurant details={restaurant} />
             </div>
           ))}
