@@ -133,7 +133,7 @@ export function saveRestaurant(restaurant) {
     return merged;
   } else {
     const newRestaurant = {
-      _id: Date.now(),
+      _id: Date.now().toString(),
       ...restaurant
     };
     restaurants.push(newRestaurant);
