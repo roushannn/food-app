@@ -1,4 +1,4 @@
-const cusines = [
+const cuisines = [
   {
     _id: "5c3430ecfc13ae122d000000",
     name: "Western"
@@ -17,6 +17,6 @@ const cusines = [
   }
 ];
 
-export function getCusines() {
-  return cusines;
+export function getCuisines() {
+  return cuisines;
 }
