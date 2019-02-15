@@ -3,6 +3,7 @@ import { getRestaurants } from "../../services/restaurantService";
 import { getCuisines, getDefaultCuisine } from "../../services/cuisineService";
 import Restaurant from "../Restaurant/Restaurant";
 import FilterBar from "../FilterBar/FilterBar";
+import SortBySelect from "../SortBySelect/SortBySelect";
 
 class HomePage extends Component {
   state = {
@@ -28,18 +29,25 @@ class HomePage extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-4 mx-auto mt-3">
+          <div className="col-auto mr-auto mt-3">
             <FilterBar
               cuisines={cuisines}
               selected={selectedCuisine}
               handleClick={this.handleCuisineSelect}
             />
           </div>
+
+          <div className="col-auto mt-3">
+            <SortBySelect />
+          </div>
         </div>
 
         <div className="row">
           {filteredRestaurantList.map(restaurant => (
-            <div className="col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex" key={restaurant._id}>
+            <div
+              className="col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex"
+              key={restaurant._id}
+            >
               <Restaurant details={restaurant} />
             </div>
           ))}
