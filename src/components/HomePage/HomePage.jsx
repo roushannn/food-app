@@ -18,7 +18,7 @@ class HomePage extends Component {
   };
 
   render() {
-    const { restaurants, cuisines, selectedCuisine } = this.state;
+    const { restaurants, cuisines, selectedCuisine, sortByList } = this.state;
     const filteredRestaurantList =
       selectedCuisine === getDefaultCuisine()
         ? restaurants
@@ -36,7 +36,7 @@ class HomePage extends Component {
           </div>
 
           <div className="col-auto mt-3">
-            <SortBySelect />
+            <SortBySelect list={sortByList} />
           </div>
         </div>
 
