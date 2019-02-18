@@ -5,7 +5,10 @@ import { render} from "react-testing-library";
 import RestaurantForm from "./RestaurantForm";
 
 test("displays all form fields on load", () => {
-  const { getByLabelText } = render(<RestaurantForm />);
+  const match = {
+    params: { id: 1}
+  }
+  const { getByLabelText } = render(<RestaurantForm match={match}/>);
 
   expect(getByLabelText("Name")).toHaveAttribute("type", "text");
   expect(getByLabelText("Address")).toHaveAttribute("type", "text");
