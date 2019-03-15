@@ -20,7 +20,7 @@ test("renders a cuisine menu from a list, All is selected by default", () => {
   const { getByText } = render(<FilterBar cuisines={cuisines} selected={null} handleClick={null}/>);
   expect(getByText(/all/i)).toBeInTheDocument();
   expect(getByText(/western/i)).toBeInTheDocument();
-  expect(getByText(/all/i)).toHaveAttribute("class", "btn btn-primary");
+  expect(getByText(/all/i)).toHaveAttribute("class", "btn btn-outline-primary");
 })
 
 
@@ -39,5 +39,5 @@ test("If there is a selected cuisine specified, it will be selected", () => {
   const { getByText } = render(<FilterBar cuisines={cuisines} selected={western} handleClick={null}/>);
   expect(getByText(/all/i)).toBeInTheDocument();
   expect(getByText(/western/i)).toBeInTheDocument();
-  expect(getByText(/western/i)).toHaveAttribute("class", "btn btn-primary");
+  expect(getByText(/western/i)).toHaveAttribute("class", "btn btn-outline-primary active");
 })

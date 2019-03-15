@@ -2,10 +2,13 @@ import React from "react";
 
 const FilterBar = props => {
   const { cuisines, selected, handleClick } = props;
-  const getClass = (cuisine, selected) => {
-    if (!selected && cuisine.name === "All") return "btn btn-primary";
-    if (selected && cuisine._id === selected._id) return "btn btn-primary";
-    return "btn btn-outline-primary";
+
+  const getClass = cuisine => {
+    if (selected === cuisine) {
+      return "btn btn-outline-primary active";
+    } else {
+      return "btn btn-outline-primary";
+    }
   };
 
   return (
@@ -14,7 +17,7 @@ const FilterBar = props => {
         <button
           key={cuisine._id}
           type="button"
-          className={getClass(cuisine, selected)}
+          className={getClass(cuisine)}
           onClick={() => handleClick(cuisine)}
           data-testid={`filter-btn-${cuisine.name.toLowerCase()}`}
         >
