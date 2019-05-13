@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { getRestaurants } from "../../services/restaurantService";
 import Restaurant from "../Restaurant/Restaurant";
-import "./HomePage.scss";
 
 class HomePage extends Component {
   state = {
@@ -13,7 +12,7 @@ class HomePage extends Component {
       <div className="container-fluid">
         <div className="row">
           {restaurants.map(restaurant => (
-            <div className="card-col" key={restaurant._id}>
+            <div className="col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex" key={restaurant._id}>
               <Restaurant details={restaurant} />
             </div>
           ))}

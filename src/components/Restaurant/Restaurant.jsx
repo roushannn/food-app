@@ -1,10 +1,10 @@
 import React from "react";
-import "./Restaurant.scss";
+import "./Restaurant.css";
 
 function Restaurant(props) {
   const { details } = props;
   return (
-    <div className="card my-3">
+    <div className="card card-width my-3">
       <img
         src={details.imageUrl}
         className="card-img-top img-fluid"
