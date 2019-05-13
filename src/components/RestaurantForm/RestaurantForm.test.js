@@ -6,9 +6,9 @@ import RestaurantForm from "./RestaurantForm";
 
 test("displays all form fields on load", () => {
   const match = {
-    params: { id: 1}
-  }
-  const { getByLabelText } = render(<RestaurantForm match={match}/>);
+    params: { id: 1 }
+  };
+  const { getByLabelText } = render(<RestaurantForm match={match} />);
 
   expect(getByLabelText("Name")).toHaveAttribute("type", "text");
   expect(getByLabelText("Address")).toHaveAttribute("type", "text");
@@ -20,13 +20,21 @@ test("displays all form fields on load", () => {
 });
 
 test("Save button us disabled on page load", () => {
-  const { getByText } = render(<RestaurantForm />);
+  const match = {
+    params: { id: 1 }
+  };
+  const { getByText } = render(<RestaurantForm match={match} />);
   expect(getByText("Save")).toHaveAttribute("disabled");
 });
 
 test("error message appears if text input is invalid", () => {
+  const match = {
+    params: { id: 1 }
+  };
   const message = /is not allowed to be empty/i;
-  const { getByText, queryByText, getByLabelText } = render(<RestaurantForm />);
+  const { getByText, queryByText, getByLabelText } = render(
+    <RestaurantForm match={match} />
+  );
   const input = getByLabelText(/name/i);
 
   //enter invalid input into text field
@@ -40,8 +48,13 @@ test("error message appears if text input is invalid", () => {
 });
 
 test("error message appears if number input is invalid", () => {
+  const match = {
+    params: { id: 1 }
+  };
   const message = /must be larger than or equal to 1/i;
-  const { getByText, queryByText, getByLabelText } = render(<RestaurantForm />);
+  const { getByText, queryByText, getByLabelText } = render(
+    <RestaurantForm match={match} />
+  );
   const input = getByLabelText(/Average Price/i);
 
   //enter invalid input into number field
