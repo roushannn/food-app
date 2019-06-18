@@ -1,7 +1,7 @@
 import "jest-dom/extend-expect";
-import "react-testing-library/cleanup-after-each";
+import "@testing-library/react/cleanup-after-each";
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 import SortBySelect from "./SortBySelect";
 
 test("renders a select list from options, 'Restaurant Name' is selected by default", () => {
@@ -10,7 +10,7 @@ test("renders a select list from options, 'Restaurant Name' is selected by defau
     { name: "Average Price", value: "averagePrice" }
   ];
 
-  const { getBySelectText, getByText, getByLabelText } = render(
+  const { getByText, getByLabelText } = render(
     <SortBySelect
       options={sortByOptions}
       selected={"name"}
@@ -18,7 +18,11 @@ test("renders a select list from options, 'Restaurant Name' is selected by defau
     />
   );
 
-  expect(getBySelectText("Restaurant Name")).toBeVisible()
-  expect(getByLabelText("Sort By")).toContainElement(getByText("Restaurant Name"))
-  expect(getByLabelText("Sort By")).toContainElement(getByText("Average Price"))
+  expect(getByText("Restaurant Name")).toBeVisible();
+  expect(getByLabelText("Sort By")).toContainElement(
+    getByText("Restaurant Name")
+  );
+  expect(getByLabelText("Sort By")).toContainElement(
+    getByText("Average Price")
+  );
 });

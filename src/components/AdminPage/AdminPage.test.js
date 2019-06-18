@@ -1,9 +1,9 @@
 import "jest-dom/extend-expect";
-import "react-testing-library/cleanup-after-each";
+import "@testing-library/react/cleanup-after-each";
 import React from "react";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { render, fireEvent } from "react-testing-library";
+import { render, fireEvent } from "@testing-library/react";
 import AdminPage from "./AdminPage";
 import * as RestaurantService from "../../services/restaurantService";
 
@@ -58,12 +58,12 @@ test("displays list of two restaurants on load", () => {
 
 test("when the delete button is clicked the restaurant row will be removed from the table", () => {
   const history = createMemoryHistory({ initialEntries: ["/"] });
-  const { getByText, queryByText } = render(
+  const { getAllByText, queryByText } = render(
     <Router history={history}>
       <AdminPage />
     </Router>
   );
-  const firstDeleteBtn = getByText("Delete");
+  const firstDeleteBtn = getAllByText("Delete")[0];
   fireEvent.click(firstDeleteBtn);
   expect(
     queryByText(/Burger Bar by Fatboy's Concepts/i)
