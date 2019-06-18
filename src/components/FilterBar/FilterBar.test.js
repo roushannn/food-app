@@ -1,7 +1,7 @@
 import "jest-dom/extend-expect";
-import "react-testing-library/cleanup-after-each";
+import "@testing-library/react/cleanup-after-each";
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 import FilterBar from "./FilterBar";
 
 test("renders a cuisine menu from a list, All is selected by default", () => {
